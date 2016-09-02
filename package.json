@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "preinstall": "./compile.sh"
   },
+  "repository": "dimapaloskin/osx-global-keypress",
   "author": "Dmitry Pavlovsky",
   "license": "MIT"
 }
