@@ -1,6 +1,6 @@
 {
   "name": "osx-global-keypress",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Global key press event handler for OS X (Mac Os)",
   "main": "index.js",
   "scripts": {
