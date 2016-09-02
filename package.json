@@ -1,0 +1,12 @@
+{
+  "name": "osx-global-keypress",
+  "version": "0.0.1",
+  "description": "Global key press event handler for OS X (Mac Os)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "./compile.sh"
+  },
+  "author": "Dmitry Pavlovsky",
+  "license": "MIT"
+}
