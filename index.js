@@ -12,7 +12,7 @@ util.inherits(Spy, events.EventEmitter);
 
 Spy.prototype.start = function() {
 
-  this.proc = spawn('./bin/globalkeypress-daemon');
+  this.proc = spawn(__dirname + '/bin/globalkeypress-daemon');
   this.isSpawned = true;
 
   this.proc.stdout.on('data', function(data) {
