@@ -1,6 +1,6 @@
 # osx-global-keypress
 
-Handle global keypress event for os x.
+Global key press event handler for OS X (Mac Os)
 
 ## Install
 
