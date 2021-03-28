@@ -8,11 +8,10 @@ myCGEventCallback(CGEventTapProxy proxy, CGEventType type,
     if ((type != kCGEventKeyDown) && (type != kCGEventKeyUp))
         return event;
 
-    CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(
-                                       event, kCGKeyboardEventKeycode);
-
+    CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
+    int flags = CGEventGetFlags(event);
     if (type == kCGEventKeyDown) {
-      printf("%d", keycode);
+      printf("%d %d", flags, keycode);
       fflush(stdout);
     }
 

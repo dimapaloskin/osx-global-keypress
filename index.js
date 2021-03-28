@@ -16,10 +16,10 @@ Spy.prototype.start = function() {
   this.isSpawned = true;
 
   this.proc.stdout.on('data', function(data) {
-
-    this.emit('press', {
-      code: parseInt(data.toString(), 10)
-    });
+    var arr = data.toString().split(" ");
+    var flag = parseInt(arr[0], 10);
+    var code = parseInt(arr[1], 10);
+    this.emit('press', {code, flag});
   }.bind(this));
 
   this.proc.stderr.on('data', function(data) {
