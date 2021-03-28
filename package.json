@@ -1,13 +1,13 @@
 {
-  "name": "osx-global-keypress",
-  "version": "0.0.5",
-  "description": "Global key press event handler for OS X (Mac Os)",
+  "name": "osx-global-keypress-with-flags",
+  "version": "0.0.0",
+  "description": "Global key press event handler for OS X (Mac Os). This fork also emits flags.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "sh ./compile.sh"
   },
-  "repository": "dimapaloskin/osx-global-keypress",
-  "author": "Dmitry Pavlovsky",
+  "repository": "maiavictor/osx-global-keypress",
+  "author": "Victor Maia",
   "license": "MIT"
 }
