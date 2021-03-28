@@ -18,7 +18,11 @@ Spy.prototype.start = function() {
   this.proc.stdout.on('data', function(data) {
     var arr = data.toString().split(" ");
     var flag = parseInt(arr[0], 10);
-    var code = parseInt(arr[1], 10);
+    var code
+      = arr[1] === "left" ? -1
+      : arr[1] === "right" ? -2
+      : arr[1] === "middle" ? -3
+      : parseInt(arr[1], 10);
     this.emit('press', {code, flag});
   }.bind(this));
 

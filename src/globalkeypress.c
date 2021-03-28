@@ -4,17 +4,21 @@ CGEventRef
 myCGEventCallback(CGEventTapProxy proxy, CGEventType type,
                   CGEventRef event, void *refcon)
 {
-
-    if ((type != kCGEventKeyDown) && (type != kCGEventKeyUp))
-        return event;
-
-    CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
     int flags = CGEventGetFlags(event);
-    if (type == kCGEventKeyDown) {
-      printf("%d %d", flags, keycode);
-      fflush(stdout);
+    if (type == kCGEventLeftMouseDown) {
+        printf("%d left", flags);
+        fflush(stdout);
+    } else if (type == kCGEventRightMouseDown) {
+        printf("%d right", flags);
+        fflush(stdout);
+    } else if (type == kCGEventOtherMouseDown) {
+        printf("%d middle", flags);
+        fflush(stdout);
+    } else {
+        CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
+        printf("%d %d", flags, keycode);
+        fflush(stdout);
     }
-
     return event;
 }
 
@@ -25,7 +29,11 @@ main(void)
     CGEventMask        eventMask;
     CFRunLoopSourceRef runLoopSource;
 
-    eventMask = ((1 << kCGEventKeyDown) | (1 << kCGEventKeyUp));
+    eventMask
+        = (1 << kCGEventKeyDown)
+        | (1 << kCGEventLeftMouseDown)
+        | (1 << kCGEventRightMouseDown)
+        | (1 << kCGEventOtherMouseDown);
     eventTap = CGEventTapCreate(kCGSessionEventTap, kCGHeadInsertEventTap, 0,
                                 eventMask, myCGEventCallback, NULL);
 
