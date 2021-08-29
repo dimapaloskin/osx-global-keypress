@@ -23,8 +23,8 @@ Spy.prototype.start = function() {
       : arr[1] === "right" ? -2
       : arr[1] === "middle" ? -3
       : arr[1] === "left_up" ? -11
-      : arr[1] === "middle_up" ? -12
-      : arr[1] === "right_up" ? -13
+      : arr[1] === "right_up" ? -12
+      : arr[1] === "middle_up" ? -13
       : parseInt(arr[1], 10);
     this.emit('press', {code, flag});
   }.bind(this));
