@@ -1,6 +1,6 @@
 {
   "name": "osx-global-keypress-extended",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Global key press event handler for OS X (Mac Os). This fork also emits flags.",
   "main": "index.js",
   "scripts": {

@@ -18,10 +18,14 @@ Spy.prototype.start = function() {
   this.proc.stdout.on('data', function(data) {
     var arr = data.toString().split(" ");
     var flag = parseInt(arr[0], 10);
+    console.log(".......", data);
     var code
       = arr[1] === "left" ? -1
       : arr[1] === "right" ? -2
       : arr[1] === "middle" ? -3
+      : arr[1] === "left-up" ? -11
+      : arr[1] === "middle-up" ? -12
+      : arr[1] === "right-up" ? -13
       : parseInt(arr[1], 10);
     this.emit('press', {code, flag});
   }.bind(this));
