@@ -4,6 +4,7 @@ CGEventRef
 myCGEventCallback(CGEventTapProxy proxy, CGEventType type,
                   CGEventRef event, void *refcon)
 {
+    //printf("press\n");
     int flags = CGEventGetFlags(event);
     if (type == kCGEventLeftMouseDown) {
         printf("%d left", flags);
@@ -22,6 +23,9 @@ myCGEventCallback(CGEventTapProxy proxy, CGEventType type,
         fflush(stdout);
     } else if (type == kCGEventOtherMouseUp) {
         printf("%d middle_up", flags);
+        fflush(stdout);
+    } else if (type == kCGEventFlagsChanged) {
+        printf("%d flags_changed", flags);
         fflush(stdout);
     } else {
         CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
@@ -45,7 +49,8 @@ main(void)
         | (1 << kCGEventOtherMouseDown)
         | (1 << kCGEventLeftMouseUp)
         | (1 << kCGEventOtherMouseUp)
-        | (1 << kCGEventRightMouseUp);
+        | (1 << kCGEventRightMouseUp)
+        | (1 << kCGEventFlagsChanged);
     eventTap = CGEventTapCreate(kCGSessionEventTap, kCGHeadInsertEventTap, 0,
                                 eventMask, myCGEventCallback, NULL);
 
