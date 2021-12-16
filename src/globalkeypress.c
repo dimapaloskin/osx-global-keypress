@@ -4,18 +4,34 @@ CGEventRef
 myCGEventCallback(CGEventTapProxy proxy, CGEventType type,
                   CGEventRef event, void *refcon)
 {
-
-    if ((type != kCGEventKeyDown) && (type != kCGEventKeyUp))
-        return event;
-
-    CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(
-                                       event, kCGKeyboardEventKeycode);
-
-    if (type == kCGEventKeyDown) {
-      printf("%d", keycode);
-      fflush(stdout);
+    //printf("press\n");
+    int flags = CGEventGetFlags(event);
+    if (type == kCGEventLeftMouseDown) {
+        printf("%d left", flags);
+        fflush(stdout);
+    } else if (type == kCGEventRightMouseDown) {
+        printf("%d right", flags);
+        fflush(stdout);
+    } else if (type == kCGEventOtherMouseDown) {
+        printf("%d middle", flags);
+        fflush(stdout);
+    }else if (type == kCGEventLeftMouseUp) {
+        printf("%d left_up", flags);
+        fflush(stdout);
+    } else if (type == kCGEventRightMouseUp) {
+        printf("%d right_up", flags);
+        fflush(stdout);
+    } else if (type == kCGEventOtherMouseUp) {
+        printf("%d middle_up", flags);
+        fflush(stdout);
+    } else if (type == kCGEventFlagsChanged) {
+        printf("%d flags_changed", flags);
+        fflush(stdout);
+    } else {
+        CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
+        printf("%d %d", flags, keycode);
+        fflush(stdout);
     }
-
     return event;
 }
 
@@ -26,7 +42,15 @@ main(void)
     CGEventMask        eventMask;
     CFRunLoopSourceRef runLoopSource;
 
-    eventMask = ((1 << kCGEventKeyDown) | (1 << kCGEventKeyUp));
+    eventMask
+        = (1 << kCGEventKeyDown)
+        | (1 << kCGEventLeftMouseDown)
+        | (1 << kCGEventRightMouseDown)
+        | (1 << kCGEventOtherMouseDown)
+        | (1 << kCGEventLeftMouseUp)
+        | (1 << kCGEventOtherMouseUp)
+        | (1 << kCGEventRightMouseUp)
+        | (1 << kCGEventFlagsChanged);
     eventTap = CGEventTapCreate(kCGSessionEventTap, kCGHeadInsertEventTap, 0,
                                 eventMask, myCGEventCallback, NULL);
 
